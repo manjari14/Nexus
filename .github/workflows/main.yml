@@ -1,0 +1,62 @@
+name: Deploy Frontend and Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy Frontend and Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Install and Build Frontend
+      - name: Install and Build Frontend
+        working-directory: ./gweccc-frontend
+        run: |
+          npm install
+          npm run build
+
+      # Step 4: Deploy Frontend to Server
+      - name: Deploy Frontend
+        env:
+          FRONTEND_SERVER_IP: ${{ secrets.FRONTEND_SERVER_IP }}
+          FRONTEND_SSH_USER: ${{ secrets.FRONTEND_SSH_USER }}
+          FRONTEND_SSH_KEY: ${{ secrets.FRONTEND_SSH_KEY }}
+        run: |
+          # Copy the frontend build files to the server
+          scp -i $FRONTEND_SSH_KEY -r ./gweccc-frontend/build/* $FRONTEND_SSH_USER@$FRONTEND_SERVER_IP:/path/to/frontend
+
+      # Step 5: Install Backend Dependencies
+      - name: Install Backend Dependencies
+        working-directory: ./gweccc-backend
+        run: |
+          npm install
+
+      # Step 6: Deploy Backend to Server
+      - name: Deploy Backend
+        env:
+          BACKEND_SERVER_IP: ${{ secrets.BACKEND_SERVER_IP }}
+          BACKEND_SSH_USER: ${{ secrets.BACKEND_SSH_USER }}
+          BACKEND_SSH_KEY: ${{ secrets.BACKEND_SSH_KEY }}
+        run: |
+          # Copy the backend code to the server
+          scp -i $BACKEND_SSH_KEY -r ./gweccc-backend/* $BACKEND_SSH_USER@$BACKEND_SERVER_IP:/path/to/backend
+          
+          # SSH into the server, install backend dependencies, and restart the service
+          ssh -i $BACKEND_SSH_KEY $BACKEND_SSH_USER@$BACKEND_SERVER_IP << EOF
+          cd /path/to/backend
+          npm install --production
+          pm2 restart all || pm2 start server.js --name "backend"
+          EOF
