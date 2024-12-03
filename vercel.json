@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "gweccc-frontend/package.json",
-      "use": "@vercel/react"
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
     },
     {
       "src": "gweccc-backend/server.js",
