@@ -55,9 +55,4 @@ Frontend Features
 Home Page: Displays the event banner and brief description.
 Event Schedule: Displays the event schedule with dates, topics, and speakers.
 Registration Form: Allows participants to register, including providing the number of delegates.
-<<<<<<< HEAD
-Admin Page: View and manage all participant registrations.
-=======
-Admin Page: View and manage all participant registrations (for admin only).
 
-> > > > > > > bac99fd5a3764d090472784a11c900a6c552c57e
