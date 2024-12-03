@@ -123,3 +123,18 @@
     opacity: 1;
   }
 }
+.event-details {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+}
+
+.event-date,
+.event-venue {
+  margin: 5px 0;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 1px;
+}
