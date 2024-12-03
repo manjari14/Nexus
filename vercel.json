@@ -2,25 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "gweccc-frontend/package.json",
+      "src": "gweccc-frontend/package.json", 
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build"  
       }
     },
     {
-      "src": "gweccc-backend/index.js",
+      "src": "gweccc-backend/server.js", 
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/gweccc-backend/$1"
+      "src": "/api/(.*)", 
+      "dest": "/gweccc-backend/$1"  
     },
     {
-      "source": "/(.*)",
-      "destination": "/gweccc-backend/$1"
+      "src": "/(.*)",
+      "dest": "/gweccc-frontend/$1"  
     }
   ]
 }
