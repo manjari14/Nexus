@@ -1,22 +1,26 @@
 {
-    "version": 2,
-    "projects": {
-      "frontend": {
-        "root": "frontend",
-        "buildCommand": "npm install && npm run build",
-        "outputDirectory": "build"
-      },
-      "backend": {
-        "root": "backend",
-        "buildCommand": "npm install",
-        "outputDirectory": ""
+  "version": 2,
+  "builds": [
+    {
+      "src": "gweccc-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
       }
     },
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/backend/$1"
-      }
-    ]
-  }
-  
+    {
+      "src": "gweccc-backend/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/gweccc-backend/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/gweccc-backend/$1"
+    }
+  ]
+}
