@@ -1,6 +1,6 @@
 README for GWECCC 2025 Project (MERN Stack)
 GWECCC 2025 Website
-This is the full-stack code for the GWECCC 2025 website built with the MERN Stack (MongoDB, Express, React, Node.js). It uses GraphQL (Apollo Server) for API integration.
+This is the full-stack code for the GWECCC 2025 website built with the MERN Stack (MongoDB, Express, React, Node.js).
 
 
 Features
