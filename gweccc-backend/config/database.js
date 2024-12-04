@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "./gweccc-backend/.env" });
+require("dotenv").config();
 
 const connectDB = async () => {
   try {
-    console.log("Environment Variables Loaded:", process.env); // Debugging line
-
-    console.log("MONGO_URI:", process.env.MONGO_URI); // Debugging line
+    console.log("Connecting to MongoDB...");
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

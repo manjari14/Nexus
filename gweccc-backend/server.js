@@ -18,7 +18,8 @@ connectDB();
 
 app.use("/api", registrationRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5009;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+module.exports = app;
